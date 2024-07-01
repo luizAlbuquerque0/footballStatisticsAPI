@@ -1,17 +1,22 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FootballStatistics.Core.Entities;
+using FootballStatistics.Core.Repositories;
+using MediatR;
 
 namespace FootballStatistics.Application.Commands.CreateUser
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
     {
-        public Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        private readonly IUserRepository _userRepository;
+        public CreateUserCommandHandler(IUserRepository userRepository)
         {
-            throw new NotImplementedException();
+            _userRepository = userRepository;    
+        }
+        public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        {
+            var user = new User(request.Name, request.Email, request.Password);
+            await _userRepository.CreateUserAsync(user);
+
+            return user.Id;
         }
     }
 }

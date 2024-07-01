@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballStatistics.API", "FootballStatistics.API\FootballStatistics.API.csproj", "{95414F90-74B9-4EA1-AD74-174C4065BAAB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C09D9EE3-30D3-40D7-BD5F-ECD53E00233F} = {C09D9EE3-30D3-40D7-BD5F-ECD53E00233F}
+		{E5AA0BB1-868C-4F00-92BE-99979E1F5B26} = {E5AA0BB1-868C-4F00-92BE-99979E1F5B26}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballStatistics.Core", "FootballStatistics.Core\FootballStatistics.Core.csproj", "{E5AA0BB1-868C-4F00-92BE-99979E1F5B26}"
 EndProject

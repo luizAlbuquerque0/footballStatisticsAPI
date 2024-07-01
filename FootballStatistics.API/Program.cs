@@ -1,6 +1,8 @@
 using FootballStatistics.Application.Commands.CreateUser;
 using FootballStatistics.Core.Repositories;
-using Microsoft.Extensions.DependencyInjection;
+using FootballStatistics.Infrastructure.Persistence;
+using FootballStatistics.Infrastructure.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<CreateUserCommand>());
 
-builder.Services.AddScoped<IUserRepository,IUserRepository>();
+builder.Services.AddScoped<IUserRepository,UserRepository>();
+
+var conectionString = builder.Configuration.GetConnectionString("FootBallStatisticsCs");
+builder.Services.AddDbContext<FootballStatisticsDbContext>(options => options.UseSqlServer(conectionString));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

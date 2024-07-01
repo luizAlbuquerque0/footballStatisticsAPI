@@ -10,5 +10,6 @@ namespace FootballStatistics.Core.Repositories
     public interface IUserRepository
     {
         Task CreateUserAsync(User user);
+        Task<User> GetUserByEmailAndPassword(string email, string password);
     }
 }

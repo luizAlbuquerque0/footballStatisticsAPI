@@ -1,5 +1,6 @@
 ﻿using FootballStatistics.Core.Entities;
 using FootballStatistics.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace FootballStatistics.Infrastructure.Persistence.Repositories
 {
@@ -14,6 +15,11 @@ namespace FootballStatistics.Infrastructure.Persistence.Repositories
         {
             await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<User> GetUserByEmailAndPassword(string email, string password)
+        {
+            return await _dbContext.Users.SingleOrDefaultAsync(u => u.Email == email || u.Password == password);
         }
     }
 }

@@ -1,7 +1,9 @@
 using FootballStatistics.Application.Commands.CreateUser;
 using FootballStatistics.Core.Repositories;
+using FootballStatistics.Core.Services;
 using FootballStatistics.Infrastructure.Persistence;
 using FootballStatistics.Infrastructure.Persistence.Repositories;
+using FootballStatistics.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<CreateUserCommand>());
 
 builder.Services.AddScoped<IUserRepository,UserRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var conectionString = builder.Configuration.GetConnectionString("FootBallStatisticsCs");
 builder.Services.AddDbContext<FootballStatisticsDbContext>(options => options.UseSqlServer(conectionString));
